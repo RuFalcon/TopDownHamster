@@ -1,0 +1,24 @@
+# Godot-specific ignores
+.godot/
+*.translation
+
+# Mono-specific ignores for C# users (if you ever use it)
+.mono/
+bin/
+obj/
+
+# Asset-specific ignores
+.import/
+export.cfg
+export_presets.cfg
+
+# Common ignores
+*.o
+*.lo
+*.so
+*.a
+*.la
+*.pyc
+*.pyo
+*.swp
+*~

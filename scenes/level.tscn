@@ -1,0 +1,69 @@
+[gd_scene load_steps=13 format=4 uid="uid://cxdkq83200fqu"]
+
+[ext_resource type="Texture2D" uid="uid://cyktg5rirwl3e" path="res://sprites/Wall.svg" id="1_w7c3h"]
+[ext_resource type="PackedScene" uid="uid://vxmmx38l3bud" path="res://scenes/player.tscn" id="2_w8frs"]
+[ext_resource type="PackedScene" uid="uid://5kjktm8upgih" path="res://scenes/key.tscn" id="3_2r41h"]
+[ext_resource type="PackedScene" uid="uid://cdv6tpk30ep85" path="res://scenes/enemy.tscn" id="3_b121j"]
+[ext_resource type="PackedScene" uid="uid://cjv28prjdcuvt" path="res://scenes/door.tscn" id="3_w8frs"]
+[ext_resource type="PackedScene" uid="uid://ogdd124eqa1t" path="res://scenes/medkit.tscn" id="4_klq6b"]
+[ext_resource type="PackedScene" uid="uid://tlyi6n827mhx" path="res://scenes/ammo.tscn" id="5_b121j"]
+[ext_resource type="PackedScene" uid="uid://bkdjqgf45alxe" path="res://scenes/weapon.tscn" id="7_8c41q"]
+[ext_resource type="PackedScene" uid="uid://bew3enlgrsdsl" path="res://scenes/game_ui.tscn" id="9_8c41q"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_b121j"]
+vertices = PackedVector2Array(1434.08, -382.094, 1439.91, 288.492, 1316.36, 45.0313, 1304.65, -286, 736.102, -388.898, 979.773, -286, 1201.94, 300.492, 987.219, 43.9688, 742.102, 191.039, 1459.84, 1213.74, 875.656, 1198.24, 871.352, 1072.46, 1075.9, 1081.44, 1207.06, 1087.81, 1470.13, 1092.79, 245.43, 308.969, 238.578, 189.039, 1083.09, 306.977)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 0, 3, 5), PackedInt32Array(2, 1, 6, 7), PackedInt32Array(8, 4, 5, 7), PackedInt32Array(9, 10, 11, 12, 13), PackedInt32Array(13, 14, 9), PackedInt32Array(15, 16, 8, 17), PackedInt32Array(17, 8, 7, 6), PackedInt32Array(6, 13, 12, 17)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(228, 179, 732, 181, 726, -399, 1444, -392, 1450, 298, 1212, 310, 1217, 1078, 1481, 1083, 1469, 1224, 866, 1208, 861, 1062, 1066, 1071, 1073, 317, 236, 319), PackedVector2Array(1306, 35, 1295, -276, 990, -276, 997, 34)])
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b121j"]
+texture = ExtResource("1_w7c3h")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+
+[sub_resource type="TileSet" id="TileSet_8c41q"]
+tile_size = Vector2i(128, 128)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_b121j")
+
+[node name="Level" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("2_w8frs")]
+position = Vector2(236, 244)
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Enemy" parent="Enemies" instance=ExtResource("3_b121j")]
+position = Vector2(1391, 0)
+
+[node name="Items" type="Node" parent="."]
+
+[node name="Key" parent="Items" instance=ExtResource("3_2r41h")]
+position = Vector2(900, 1131)
+
+[node name="Medkit" parent="Items" instance=ExtResource("4_klq6b")]
+position = Vector2(1366, 255)
+
+[node name="Ammo" parent="Items" instance=ExtResource("5_b121j")]
+position = Vector2(859, -341)
+
+[node name="Weapon" parent="Items" instance=ExtResource("7_8c41q")]
+position = Vector2(516, 257)
+
+[node name="Doors" type="Node" parent="."]
+
+[node name="Door" parent="Doors" instance=ExtResource("3_w8frs")]
+position = Vector2(1600, 0)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(-1, -2)
+navigation_polygon = SubResource("NavigationPolygon_b121j")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAABAAMAAAAAAAAAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAAEAAMAAAAAAAAAAAAFAAMAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAEAAAAAAAAAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAP//AAAAAAAAAAAEAP7/AAAAAAAAAAAEAP3/AAAAAAAAAAAEAPz/AAAAAAAAAAAEAPv/AAAAAAAAAAAFAPv/AAAAAAAAAAAGAPv/AAAAAAAAAAAHAPv/AAAAAAAAAAAIAPv/AAAAAAAAAAAJAPv/AAAAAAAAAAAKAPv/AAAAAAAAAAALAPv/AAAAAAAAAAAMAPv/AAAAAAAAAAAMAPz/AAAAAAAAAAAMAP3/AAAAAAAAAAAMAP7/AAAAAAAAAAAMAAEAAAAAAAAAAAAMAAIAAAAAAAAAAAAMAAMAAAAAAAAAAAALAAMAAAAAAAAAAAAKAAMAAAAAAAAAAAAKAAQAAAAAAAAAAAAKAAUAAAAAAAAAAAAKAAYAAAAAAAAAAAAKAAcAAAAAAAAAAAALAAcAAAAAAAAAAAAMAAcAAAAAAAAAAAAMAAgAAAAAAAAAAAAMAAkAAAAAAAAAAAAMAAoAAAAAAAAAAAALAAoAAAAAAAAAAAAKAAoAAAAAAAAAAAAJAAoAAAAAAAAAAAAIAAoAAAAAAAAAAAAHAAoAAAAAAAAAAAAGAAoAAAAAAAAAAAAFAAoAAAAAAAAAAAAFAAkAAAAAAAAAAAAFAAgAAAAAAAAAAAAFAAcAAAAAAAAAAAAGAAcAAAAAAAAAAAAHAAcAAAAAAAAAAAAHAAYAAAAAAAAAAAAHAAUAAAAAAAAAAAAHAAQAAAAAAAAAAAAHAAMAAAAAAAAAAAAGAAMAAAAAAAAAAAANAP7/AAAAAAAAAAAOAP7/AAAAAAAAAAAPAP7/AAAAAAAAAAARAP7/AAAAAAAAAAAQAP7/AAAAAAAAAAASAP7/AAAAAAAAAAASAP3/AAAAAAAAAAASAPz/AAAAAAAAAAATAPz/AAAAAAAAAAAUAPz/AAAAAAAAAAAVAPz/AAAAAAAAAAANAAEAAAAAAAAAAAAOAAEAAAAAAAAAAAAPAAEAAAAAAAAAAAAQAAEAAAAAAAAAAAARAAEAAAAAAAAAAAASAAEAAAAAAAAAAAASAAIAAAAAAAAAAAASAAMAAAAAAAAAAAATAAMAAAAAAAAAAAAUAAMAAAAAAAAAAAAVAAMAAAAAAAAAAAAWAPz/AAAAAAAAAAAWAP3/AAAAAAAAAAAWAP7/AAAAAAAAAAAWAP//AAAAAAAAAAAWAAAAAAAAAAAAAAAWAAEAAAAAAAAAAAAWAAIAAAAAAAAAAAAWAAMAAAAAAAAAAAAIAP7/AAAAAAAAAAAJAP7/AAAAAAAAAAAJAP//AAAAAAAAAAAIAP//AAAAAAAAAAA=")
+tile_set = SubResource("TileSet_8c41q")
+
+[node name="GameUI" parent="." instance=ExtResource("9_8c41q")]
+
+[connection signal="ammo_changed" from="Player" to="GameUI" method="update_ammo"]
+[connection signal="keys_changed" from="Player" to="GameUI" method="update_keys"]
