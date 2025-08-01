@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpucsnew67t36"]
+
+[ext_resource type="PackedScene" uid="uid://cdv6tpk30ep85" path="res://scenes/EnemyBase.tscn" id="1_tq73k"]
+[ext_resource type="Script" uid="uid://c42ax6tvhvqpm" path="res://scripts/melee_enemy.gd" id="2_xnaus"]
+
+[node name="MeleeEnemy" instance=ExtResource("1_tq73k")]
+script = ExtResource("2_xnaus")
+attack_damage = 10
+attack_rate = 1.0

@@ -26,3 +26,7 @@ text = "Патроны: 0"
 [node name="KeysLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Ключи: 0"
+
+[node name="GrenadesLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Гранаты: 0"

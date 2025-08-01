@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b410kanoouvnm"]
+
+[ext_resource type="PackedScene" uid="uid://bkdjqgf45alxe" path="res://scenes/weapon.tscn" id="1_20e1h"]
+
+[node name="Rifle" instance=ExtResource("1_20e1h")]
+weapon_name = "Винтовка"
+damage = 25
+fire_rate = 8.0
+bullet_speed = 1500.0
+spread_angle = 1.5

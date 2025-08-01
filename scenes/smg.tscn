@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7mjcnsnv26ua"]
+
+[ext_resource type="PackedScene" uid="uid://bkdjqgf45alxe" path="res://scenes/weapon.tscn" id="1_4itdw"]
+[ext_resource type="Script" uid="uid://bnl1pgxq4emdv" path="res://scripts/smg.gd" id="2_k2evk"]
+[ext_resource type="Texture2D" uid="uid://t3ivd0bsjo5y" path="res://sprites/SMG.png" id="3_k2evk"]
+
+[node name="SMG" instance=ExtResource("1_4itdw")]
+script = ExtResource("2_k2evk")
+weapon_name = "ПП"
+damage = 8
+fire_rate = 12.0
+bullet_speed = 1000.0
+spread_angle = 7.0
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_k2evk")

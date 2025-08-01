@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://13vgkb7qw8th"]
+
+[ext_resource type="Script" uid="uid://q7atebbwrudj" path="res://scripts/explosion.gd" id="1_17npe"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3oo6d"]
+radius = 52.5547
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_17npe"]
+
+[node name="Explosion" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_17npe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3oo6d")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_17npe")
+
+[node name="LifetimeTimer" type="Timer" parent="."]
+one_shot = true

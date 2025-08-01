@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cdv6tpk30ep85"]
 
 [ext_resource type="Texture2D" uid="uid://bd1xqrvd4xspk" path="res://icon.svg" id="1_7p1mj"]
-[ext_resource type="Script" uid="uid://bsxnoh7qpk434" path="res://scripts/enemy.gd" id="1_md0e3"]
+[ext_resource type="Script" uid="uid://bsxnoh7qpk434" path="res://scripts/enemy_base.gd" id="1_md0e3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_md0e3"]
 size = Vector2(128, 128)
@@ -12,7 +12,8 @@ radius = 555.749
 [sub_resource type="CircleShape2D" id="CircleShape2D_md0e3"]
 radius = 69.0652
 
-[node name="Enemy" type="CharacterBody2D" groups=["enemies"]]
+[node name="EnemyBase" type="CharacterBody2D" groups=["enemies"]]
+collision_layer = 2
 script = ExtResource("1_md0e3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -36,6 +37,8 @@ shape = SubResource("CircleShape2D_md0e3")
 
 [node name="AttackCooldownTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="LineOfSight" type="RayCast2D" parent="."]
 
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]

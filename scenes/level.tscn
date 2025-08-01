@@ -1,14 +1,19 @@
-[gd_scene load_steps=13 format=4 uid="uid://cxdkq83200fqu"]
+[gd_scene load_steps=18 format=4 uid="uid://cxdkq83200fqu"]
 
 [ext_resource type="Texture2D" uid="uid://cyktg5rirwl3e" path="res://sprites/Wall.svg" id="1_w7c3h"]
+[ext_resource type="PackedScene" uid="uid://cpucsnew67t36" path="res://scenes/melee_enemy.tscn" id="1_wc255"]
 [ext_resource type="PackedScene" uid="uid://vxmmx38l3bud" path="res://scenes/player.tscn" id="2_w8frs"]
 [ext_resource type="PackedScene" uid="uid://5kjktm8upgih" path="res://scenes/key.tscn" id="3_2r41h"]
-[ext_resource type="PackedScene" uid="uid://cdv6tpk30ep85" path="res://scenes/enemy.tscn" id="3_b121j"]
 [ext_resource type="PackedScene" uid="uid://cjv28prjdcuvt" path="res://scenes/door.tscn" id="3_w8frs"]
 [ext_resource type="PackedScene" uid="uid://ogdd124eqa1t" path="res://scenes/medkit.tscn" id="4_klq6b"]
 [ext_resource type="PackedScene" uid="uid://tlyi6n827mhx" path="res://scenes/ammo.tscn" id="5_b121j"]
-[ext_resource type="PackedScene" uid="uid://bkdjqgf45alxe" path="res://scenes/weapon.tscn" id="7_8c41q"]
+[ext_resource type="PackedScene" uid="uid://x7hjgqumiieq" path="res://scenes/door_base.tscn" id="7_t1rx8"]
+[ext_resource type="PackedScene" uid="uid://cjwfe8ag3ruqi" path="res://scenes/door_trigger.tscn" id="8_8iemx"]
 [ext_resource type="PackedScene" uid="uid://bew3enlgrsdsl" path="res://scenes/game_ui.tscn" id="9_8c41q"]
+[ext_resource type="PackedScene" uid="uid://d0cymp035dqvs" path="res://scenes/pistol.tscn" id="9_fpun6"]
+[ext_resource type="PackedScene" uid="uid://b410kanoouvnm" path="res://scenes/rifle.tscn" id="10_wc255"]
+[ext_resource type="PackedScene" uid="uid://c7mjcnsnv26ua" path="res://scenes/smg.tscn" id="11_arp2o"]
+[ext_resource type="PackedScene" uid="uid://c64b11crsa0g1" path="res://scenes/bazooka.tscn" id="12_ux5qa"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_b121j"]
 vertices = PackedVector2Array(1434.08, -382.094, 1439.91, 288.492, 1316.36, 45.0313, 1304.65, -286, 736.102, -388.898, 979.773, -286, 1201.94, 300.492, 987.219, 43.9688, 742.102, 191.039, 1459.84, 1213.74, 875.656, 1198.24, 871.352, 1072.46, 1075.9, 1081.44, 1207.06, 1087.81, 1470.13, 1092.79, 245.43, 308.969, 238.578, 189.039, 1083.09, 306.977)
@@ -28,13 +33,13 @@ sources/0 = SubResource("TileSetAtlasSource_b121j")
 
 [node name="Level" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("2_w8frs")]
-position = Vector2(236, 244)
-
 [node name="Enemies" type="Node" parent="."]
 
-[node name="Enemy" parent="Enemies" instance=ExtResource("3_b121j")]
-position = Vector2(1391, 0)
+[node name="MeleeEnemy" parent="Enemies" instance=ExtResource("1_wc255")]
+position = Vector2(1266, 155)
+
+[node name="MeleeEnemy2" parent="Enemies" instance=ExtResource("1_wc255")]
+position = Vector2(1265, 305)
 
 [node name="Items" type="Node" parent="."]
 
@@ -47,13 +52,44 @@ position = Vector2(1366, 255)
 [node name="Ammo" parent="Items" instance=ExtResource("5_b121j")]
 position = Vector2(859, -341)
 
-[node name="Weapon" parent="Items" instance=ExtResource("7_8c41q")]
-position = Vector2(516, 257)
-
 [node name="Doors" type="Node" parent="."]
+
+[node name="DoorBase" parent="Doors" instance=ExtResource("7_t1rx8")]
+position = Vector2(575, 257)
+
+[node name="DoorTrigger" parent="Doors" node_paths=PackedStringArray("target_door") instance=ExtResource("8_8iemx")]
+position = Vector2(408, 244)
+target_door = NodePath("../DoorBase")
+
+[node name="DoorTrigger2" parent="Doors" node_paths=PackedStringArray("target_door") instance=ExtResource("8_8iemx")]
+position = Vector2(732, 244)
+target_door = NodePath("../DoorBase")
+
+[node name="DoorTrigger3" parent="Doors" node_paths=PackedStringArray("target_door") instance=ExtResource("8_8iemx")]
+position = Vector2(2483, 15)
+target_door = NodePath("../DoorBase2")
+action = "close_only"
 
 [node name="Door" parent="Doors" instance=ExtResource("3_w8frs")]
 position = Vector2(1600, 0)
+
+[node name="DoorBase2" parent="Doors" instance=ExtResource("7_t1rx8")]
+position = Vector2(2368, 2)
+is_open_by_default = true
+
+[node name="Weapons" type="Node" parent="."]
+
+[node name="Pistol" parent="Weapons" instance=ExtResource("9_fpun6")]
+position = Vector2(840, 254)
+
+[node name="Rifle" parent="Weapons" instance=ExtResource("10_wc255")]
+position = Vector2(844, -427)
+
+[node name="SMG" parent="Weapons" instance=ExtResource("11_arp2o")]
+position = Vector2(1386, 1117)
+
+[node name="Bazooka" parent="Weapons" instance=ExtResource("12_ux5qa")]
+position = Vector2(2673, -214)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 position = Vector2(-1, -2)
@@ -63,7 +99,11 @@ navigation_polygon = SubResource("NavigationPolygon_b121j")
 tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAABAAMAAAAAAAAAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAAEAAMAAAAAAAAAAAAFAAMAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAEAAAAAAAAAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAP//AAAAAAAAAAAEAP7/AAAAAAAAAAAEAP3/AAAAAAAAAAAEAPz/AAAAAAAAAAAEAPv/AAAAAAAAAAAFAPv/AAAAAAAAAAAGAPv/AAAAAAAAAAAHAPv/AAAAAAAAAAAIAPv/AAAAAAAAAAAJAPv/AAAAAAAAAAAKAPv/AAAAAAAAAAALAPv/AAAAAAAAAAAMAPv/AAAAAAAAAAAMAPz/AAAAAAAAAAAMAP3/AAAAAAAAAAAMAP7/AAAAAAAAAAAMAAEAAAAAAAAAAAAMAAIAAAAAAAAAAAAMAAMAAAAAAAAAAAALAAMAAAAAAAAAAAAKAAMAAAAAAAAAAAAKAAQAAAAAAAAAAAAKAAUAAAAAAAAAAAAKAAYAAAAAAAAAAAAKAAcAAAAAAAAAAAALAAcAAAAAAAAAAAAMAAcAAAAAAAAAAAAMAAgAAAAAAAAAAAAMAAkAAAAAAAAAAAAMAAoAAAAAAAAAAAALAAoAAAAAAAAAAAAKAAoAAAAAAAAAAAAJAAoAAAAAAAAAAAAIAAoAAAAAAAAAAAAHAAoAAAAAAAAAAAAGAAoAAAAAAAAAAAAFAAoAAAAAAAAAAAAFAAkAAAAAAAAAAAAFAAgAAAAAAAAAAAAFAAcAAAAAAAAAAAAGAAcAAAAAAAAAAAAHAAcAAAAAAAAAAAAHAAYAAAAAAAAAAAAHAAUAAAAAAAAAAAAHAAQAAAAAAAAAAAAHAAMAAAAAAAAAAAAGAAMAAAAAAAAAAAANAP7/AAAAAAAAAAAOAP7/AAAAAAAAAAAPAP7/AAAAAAAAAAARAP7/AAAAAAAAAAAQAP7/AAAAAAAAAAASAP7/AAAAAAAAAAASAP3/AAAAAAAAAAASAPz/AAAAAAAAAAATAPz/AAAAAAAAAAAUAPz/AAAAAAAAAAAVAPz/AAAAAAAAAAANAAEAAAAAAAAAAAAOAAEAAAAAAAAAAAAPAAEAAAAAAAAAAAAQAAEAAAAAAAAAAAARAAEAAAAAAAAAAAASAAEAAAAAAAAAAAASAAIAAAAAAAAAAAASAAMAAAAAAAAAAAATAAMAAAAAAAAAAAAUAAMAAAAAAAAAAAAVAAMAAAAAAAAAAAAWAPz/AAAAAAAAAAAWAP3/AAAAAAAAAAAWAP7/AAAAAAAAAAAWAP//AAAAAAAAAAAWAAAAAAAAAAAAAAAWAAEAAAAAAAAAAAAWAAIAAAAAAAAAAAAWAAMAAAAAAAAAAAAIAP7/AAAAAAAAAAAJAP7/AAAAAAAAAAAJAP//AAAAAAAAAAAIAP//AAAAAAAAAAA=")
 tile_set = SubResource("TileSet_8c41q")
 
+[node name="Player" parent="." instance=ExtResource("2_w8frs")]
+position = Vector2(236, 244)
+
 [node name="GameUI" parent="." instance=ExtResource("9_8c41q")]
 
 [connection signal="ammo_changed" from="Player" to="GameUI" method="update_ammo"]
+[connection signal="grenades_changed" from="Player" to="GameUI" method="update_grenades"]
 [connection signal="keys_changed" from="Player" to="GameUI" method="update_keys"]
