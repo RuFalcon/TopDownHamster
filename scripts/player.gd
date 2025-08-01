@@ -74,7 +74,7 @@ func equip_weapon(weapon_node: WeaponBase):
 		weapon_holder.call_deferred("remove_child", old_weapon)
 		old_weapon.drop()
 		get_tree().root.call_deferred("add_child", old_weapon)
-		call_deferred("_place_dropped_weapon", old_weapon, self.global_position)
+		call_deferred("_place_dropped_weapon", old_weapon, weapon_node.global_position)
 
 	current_weapon = weapon_node
 	if current_weapon.get_parent() != null:
