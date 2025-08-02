@@ -6,7 +6,6 @@ extends Node
 var sfx_library = {
 
 	"throw_grenade": preload("res://sound/grenade.mp3"),
-	"shoot_pistol": preload("res://sound/pistol.mp3"),
 	"shoot_laser_bazooka": preload("res://sound/laser-gun.mp3"),
 	"ammo": preload("res://sound/ammo.mp3"),
 	"pickup_item": preload("res://sound/chime-sound.mp3"),
