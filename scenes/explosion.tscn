@@ -1,11 +1,53 @@
-[gd_scene load_steps=4 format=3 uid="uid://13vgkb7qw8th"]
+[gd_scene load_steps=10 format=3 uid="uid://13vgkb7qw8th"]
 
 [ext_resource type="Script" uid="uid://q7atebbwrudj" path="res://scripts/explosion.gd" id="1_17npe"]
+[ext_resource type="Texture2D" uid="uid://cyk7vxjarfp2c" path="res://sprites/explosion64.webp" id="2_nfeox"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3oo6d"]
-radius = 52.5547
+radius = 34.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aw4cw"]
+atlas = ExtResource("2_nfeox")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3el85"]
+atlas = ExtResource("2_nfeox")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hbmxj"]
+atlas = ExtResource("2_nfeox")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xfoey"]
+atlas = ExtResource("2_nfeox")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v8gpv"]
+atlas = ExtResource("2_nfeox")
+region = Rect2(0, 128, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_17npe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aw4cw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3el85")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hbmxj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xfoey")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v8gpv")
+}],
+"loop": false,
+"name": &"explode",
+"speed": 10.0
+}]
 
 [node name="Explosion" type="Area2D"]
 collision_mask = 2
@@ -16,6 +58,9 @@ shape = SubResource("CircleShape2D_3oo6d")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_17npe")
+animation = &"explode"
+frame = 4
+frame_progress = 1.0
 
 [node name="LifetimeTimer" type="Timer" parent="."]
 one_shot = true

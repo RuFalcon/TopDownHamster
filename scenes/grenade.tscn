@@ -1,20 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://dxc488jgsjhxq"]
+[gd_scene load_steps=3 format=3 uid="uid://drvokvrjkoy76"]
 
-[ext_resource type="Texture2D" uid="uid://p2muou2et024" path="res://sprites/grenade.png" id="1_cvyik"]
 [ext_resource type="Script" uid="uid://c0ue63ndva2uw" path="res://scripts/grenade.gd" id="1_wxtds"]
-[ext_resource type="PackedScene" uid="uid://13vgkb7qw8th" path="res://scenes/explosion.tscn" id="2_vhiwl"]
+[ext_resource type="Texture2D" uid="uid://dp3srldwj6aqc" path="res://sprites/projectiles.webp" id="2_wxtds"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_wxtds"]
-radius = 23.1948
-
-[node name="Grenade" type="CharacterBody2D"]
-collision_mask = 2
+[node name="Grenade" type="Node2D"]
 script = ExtResource("1_wxtds")
-explosion_scene = ExtResource("2_vhiwl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("1_cvyik")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_wxtds")
+scale = Vector2(0.025, 0.025)
+texture = ExtResource("2_wxtds")
+region_enabled = true
+region_rect = Rect2(0, 5, 10, 11.5523)

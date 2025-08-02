@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://vxmmx38l3bud"]
+[gd_scene load_steps=8 format=3 uid="uid://vxmmx38l3bud"]
 
 [ext_resource type="Script" uid="uid://by0x5g6ppujgg" path="res://scripts/player.gd" id="1_g2els"]
-[ext_resource type="PackedScene" uid="uid://dxc488jgsjhxq" path="res://scenes/grenade.tscn" id="2_dqkch"]
+[ext_resource type="PackedScene" uid="uid://drvokvrjkoy76" path="res://scenes/grenade.tscn" id="2_dqkch"]
 [ext_resource type="Texture2D" uid="uid://bd1xqrvd4xspk" path="res://icon.svg" id="2_qhqgy"]
 [ext_resource type="PackedScene" uid="uid://13vgkb7qw8th" path="res://scenes/explosion.tscn" id="3_qlg0r"]
+[ext_resource type="PackedScene" uid="uid://bxpe2hg8556a" path="res://scenes/melee_hit.tscn" id="4_qlg0r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
 size = Vector2(128, 128)
@@ -16,6 +17,7 @@ collision_mask = 3
 script = ExtResource("1_g2els")
 grenade_scene = ExtResource("2_dqkch")
 explosion_scene = ExtResource("3_qlg0r")
+melee_hit_scene = ExtResource("4_qlg0r")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_qhqgy")

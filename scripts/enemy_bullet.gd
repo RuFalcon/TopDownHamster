@@ -7,15 +7,16 @@ var direction: Vector2 = Vector2.ZERO
 
 func _physics_process(delta):
 	position += direction * speed * delta
-
+	
+func set_direction(dir: Vector2):
+	direction = dir
+	rotation = direction.angle()
 
 func _on_body_entered(body):
-
 	if body.is_in_group("player"):
 		body.take_damage(damage)
 		queue_free()
 		
-
 	if body is TileMapLayer:
 		queue_free()
 

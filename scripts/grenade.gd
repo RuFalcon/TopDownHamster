@@ -1,20 +1,32 @@
-extends CharacterBody2D
+extends Node2D
 
-@export var explosion_scene: PackedScene
+var explosion_scene: PackedScene
+var target_position: Vector2
 
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var launch_velocity: Vector2
+@export var flight_duration: float = 0.8 # Время полета в секундах
+@export var flight_height: float = 5.5 # "Высота" прыжка (увеличение размера)
+@export var final_flight_height: float = 5   
+
+@onready var sprite: Sprite2D = $Sprite2D
 
 func _ready():
-	velocity = launch_velocity
+	fly_to_target()
 
-func _physics_process(delta):
-	velocity.y += gravity * delta
+func fly_to_target():
+
+	var tween = create_tween()
+
+	tween.tween_property(self, "global_position", target_position, flight_duration).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+
+	var scale_tween = create_tween()
+	scale_tween.tween_property(sprite, "scale", Vector2.ONE * flight_height, flight_duration / 2.0)\
+			   .set_trans(Tween.TRANS_SINE)\
+			   .set_ease(Tween.EASE_OUT)
+	scale_tween.tween_property(sprite, "scale", Vector2.ONE * final_flight_height, flight_duration / 2.0)\
+			   .set_trans(Tween.TRANS_SINE)\
+			   .set_ease(Tween.EASE_IN)
 	
-	move_and_slide()
-	
-	if get_slide_collision_count() > 0:
-		explode()
+	tween.finished.connect(explode)
 
 func explode():
 	if not explosion_scene:

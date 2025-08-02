@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=4 uid="uid://cxdkq83200fqu"]
+[gd_scene load_steps=20 format=4 uid="uid://cxdkq83200fqu"]
 
 [ext_resource type="Texture2D" uid="uid://cyktg5rirwl3e" path="res://sprites/Wall.svg" id="1_w7c3h"]
 [ext_resource type="PackedScene" uid="uid://cpucsnew67t36" path="res://scenes/melee_enemy.tscn" id="1_wc255"]
 [ext_resource type="PackedScene" uid="uid://vxmmx38l3bud" path="res://scenes/player.tscn" id="2_w8frs"]
+[ext_resource type="PackedScene" uid="uid://cgyj20s3g3wj3" path="res://scenes/ranged_enemy.tscn" id="2_wc255"]
 [ext_resource type="PackedScene" uid="uid://5kjktm8upgih" path="res://scenes/key.tscn" id="3_2r41h"]
 [ext_resource type="PackedScene" uid="uid://cjv28prjdcuvt" path="res://scenes/door.tscn" id="3_w8frs"]
 [ext_resource type="PackedScene" uid="uid://ogdd124eqa1t" path="res://scenes/medkit.tscn" id="4_klq6b"]
@@ -14,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://b410kanoouvnm" path="res://scenes/rifle.tscn" id="10_wc255"]
 [ext_resource type="PackedScene" uid="uid://c7mjcnsnv26ua" path="res://scenes/smg.tscn" id="11_arp2o"]
 [ext_resource type="PackedScene" uid="uid://c64b11crsa0g1" path="res://scenes/bazooka.tscn" id="12_ux5qa"]
+[ext_resource type="PackedScene" uid="uid://y1supa62jlxt" path="res://scenes/loot_box.tscn" id="15_wc255"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_b121j"]
 vertices = PackedVector2Array(1434.08, -382.094, 1439.91, 288.492, 1316.36, 45.0313, 1304.65, -286, 736.102, -388.898, 979.773, -286, 1201.94, 300.492, 987.219, 43.9688, 742.102, 191.039, 1459.84, 1213.74, 875.656, 1198.24, 871.352, 1072.46, 1075.9, 1081.44, 1207.06, 1087.81, 1470.13, 1092.79, 245.43, 308.969, 238.578, 189.039, 1083.09, 306.977)
@@ -33,13 +35,16 @@ sources/0 = SubResource("TileSetAtlasSource_b121j")
 
 [node name="Level" type="Node2D"]
 
+[node name="Player" parent="." instance=ExtResource("2_w8frs")]
+position = Vector2(236, 244)
+
 [node name="Enemies" type="Node" parent="."]
 
-[node name="MeleeEnemy" parent="Enemies" instance=ExtResource("1_wc255")]
-position = Vector2(1266, 155)
+[node name="RangedEnemy" parent="Enemies" instance=ExtResource("2_wc255")]
+position = Vector2(2617, -182)
 
-[node name="MeleeEnemy2" parent="Enemies" instance=ExtResource("1_wc255")]
-position = Vector2(1265, 305)
+[node name="MeleeEnemy" parent="Enemies" instance=ExtResource("1_wc255")]
+position = Vector2(1334, 156)
 
 [node name="Items" type="Node" parent="."]
 
@@ -80,16 +85,7 @@ is_open_by_default = true
 [node name="Weapons" type="Node" parent="."]
 
 [node name="Pistol" parent="Weapons" instance=ExtResource("9_fpun6")]
-position = Vector2(840, 254)
-
-[node name="Rifle" parent="Weapons" instance=ExtResource("10_wc255")]
-position = Vector2(844, -427)
-
-[node name="SMG" parent="Weapons" instance=ExtResource("11_arp2o")]
-position = Vector2(1386, 1117)
-
-[node name="Bazooka" parent="Weapons" instance=ExtResource("12_ux5qa")]
-position = Vector2(2673, -214)
+position = Vector2(996, 346)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 position = Vector2(-1, -2)
@@ -99,10 +95,21 @@ navigation_polygon = SubResource("NavigationPolygon_b121j")
 tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAABAAMAAAAAAAAAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAAEAAMAAAAAAAAAAAAFAAMAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAEAAAAAAAAAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAP//AAAAAAAAAAAEAP7/AAAAAAAAAAAEAP3/AAAAAAAAAAAEAPz/AAAAAAAAAAAEAPv/AAAAAAAAAAAFAPv/AAAAAAAAAAAGAPv/AAAAAAAAAAAHAPv/AAAAAAAAAAAIAPv/AAAAAAAAAAAJAPv/AAAAAAAAAAAKAPv/AAAAAAAAAAALAPv/AAAAAAAAAAAMAPv/AAAAAAAAAAAMAPz/AAAAAAAAAAAMAP3/AAAAAAAAAAAMAP7/AAAAAAAAAAAMAAEAAAAAAAAAAAAMAAIAAAAAAAAAAAAMAAMAAAAAAAAAAAALAAMAAAAAAAAAAAAKAAMAAAAAAAAAAAAKAAQAAAAAAAAAAAAKAAUAAAAAAAAAAAAKAAYAAAAAAAAAAAAKAAcAAAAAAAAAAAALAAcAAAAAAAAAAAAMAAcAAAAAAAAAAAAMAAgAAAAAAAAAAAAMAAkAAAAAAAAAAAAMAAoAAAAAAAAAAAALAAoAAAAAAAAAAAAKAAoAAAAAAAAAAAAJAAoAAAAAAAAAAAAIAAoAAAAAAAAAAAAHAAoAAAAAAAAAAAAGAAoAAAAAAAAAAAAFAAoAAAAAAAAAAAAFAAkAAAAAAAAAAAAFAAgAAAAAAAAAAAAFAAcAAAAAAAAAAAAGAAcAAAAAAAAAAAAHAAcAAAAAAAAAAAAHAAYAAAAAAAAAAAAHAAUAAAAAAAAAAAAHAAQAAAAAAAAAAAAHAAMAAAAAAAAAAAAGAAMAAAAAAAAAAAANAP7/AAAAAAAAAAAOAP7/AAAAAAAAAAAPAP7/AAAAAAAAAAARAP7/AAAAAAAAAAAQAP7/AAAAAAAAAAASAP7/AAAAAAAAAAASAP3/AAAAAAAAAAASAPz/AAAAAAAAAAATAPz/AAAAAAAAAAAUAPz/AAAAAAAAAAAVAPz/AAAAAAAAAAANAAEAAAAAAAAAAAAOAAEAAAAAAAAAAAAPAAEAAAAAAAAAAAAQAAEAAAAAAAAAAAARAAEAAAAAAAAAAAASAAEAAAAAAAAAAAASAAIAAAAAAAAAAAASAAMAAAAAAAAAAAATAAMAAAAAAAAAAAAUAAMAAAAAAAAAAAAVAAMAAAAAAAAAAAAWAPz/AAAAAAAAAAAWAP3/AAAAAAAAAAAWAP7/AAAAAAAAAAAWAP//AAAAAAAAAAAWAAAAAAAAAAAAAAAWAAEAAAAAAAAAAAAWAAIAAAAAAAAAAAAWAAMAAAAAAAAAAAAIAP7/AAAAAAAAAAAJAP7/AAAAAAAAAAAJAP//AAAAAAAAAAAIAP//AAAAAAAAAAA=")
 tile_set = SubResource("TileSet_8c41q")
 
-[node name="Player" parent="." instance=ExtResource("2_w8frs")]
-position = Vector2(236, 244)
-
 [node name="GameUI" parent="." instance=ExtResource("9_8c41q")]
+
+[node name="LootBoxes" type="Node" parent="."]
+
+[node name="LootBox" parent="LootBoxes" instance=ExtResource("15_wc255")]
+position = Vector2(730, -433)
+loot_scene = ExtResource("10_wc255")
+
+[node name="LootBox2" parent="LootBoxes" instance=ExtResource("15_wc255")]
+position = Vector2(1412, 1130)
+loot_scene = ExtResource("11_arp2o")
+
+[node name="LootBox3" parent="LootBoxes" instance=ExtResource("15_wc255")]
+position = Vector2(2655, -12)
+loot_scene = ExtResource("12_ux5qa")
 
 [connection signal="ammo_changed" from="Player" to="GameUI" method="update_ammo"]
 [connection signal="grenades_changed" from="Player" to="GameUI" method="update_grenades"]

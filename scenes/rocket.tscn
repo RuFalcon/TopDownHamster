@@ -1,19 +1,20 @@
 [gd_scene load_steps=4 format=3 uid="uid://chbqqhf6nqiwi"]
 
 [ext_resource type="Script" uid="uid://pyvolfkymagx" path="res://scripts/bullet.gd" id="1_dkv7l"]
-[ext_resource type="Texture2D" uid="uid://b1djopfp1lfvb" path="res://sprites/Rectangle.svg" id="2_agf72"]
+[ext_resource type="Texture2D" uid="uid://dp3srldwj6aqc" path="res://sprites/projectiles.webp" id="2_dkv7l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y25gk"]
 size = Vector2(32, 32)
 
 [node name="Rocket" type="Area2D"]
-modulate = Color(1, 0.164706, 0.835294, 1)
 collision_mask = 2
 script = ExtResource("1_dkv7l")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(2, 2)
-texture = ExtResource("2_agf72")
+scale = Vector2(4, 4)
+texture = ExtResource("2_dkv7l")
+region_enabled = true
+region_rect = Rect2(21, 21, 10, 9)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_y25gk")

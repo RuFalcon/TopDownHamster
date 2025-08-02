@@ -10,6 +10,7 @@ signal grenades_changed(grenade_count)
 @export var grenade_scene: PackedScene
 @export var explosion_scene: PackedScene
 @export var grenade_launch_force: float = 750.0
+@export var melee_hit_scene: PackedScene
 
 var bullet_scene = preload("res://scenes/bullet.tscn")
 
@@ -35,14 +36,32 @@ func _ready():
 	grenades_changed.emit(grenade_count)
 	
 func _process(delta: float) -> void:
-	if Input.is_action_pressed("shoot") and current_weapon and ammo_count > 0 and can_shoot:
-		current_weapon.shoot()
-		ammo_count -= 1
-		can_shoot = false
-		fire_rate_timer.start()
-		ammo_changed.emit(ammo_count)
+	if Input.is_action_just_pressed("shoot"):
+		if current_weapon:
+			if ammo_count > 0 and can_shoot:
+				current_weapon.shoot()
+				ammo_count -= 1
+				can_shoot = false
+				fire_rate_timer.start()
+				ammo_changed.emit(ammo_count)
+		else:
+			perform_melee_attack()
+		
 	if Input.is_action_just_pressed("throw_grenade"):
 		throw_grenade()
+		
+func perform_melee_attack():
+	if not melee_hit_scene:
+		print("Сцена атаки ближнего боя не назначена игроку!")
+		return
+	
+	var hit = melee_hit_scene.instantiate()
+	
+	add_child(hit)
+	
+	var direction = Vector2.RIGHT if not sprite.flip_h else Vector2.LEFT
+	var offset = 120.0
+	hit.position = direction * offset
 
 func _physics_process(delta):
 	handle_movement()
@@ -103,15 +122,18 @@ func throw_grenade():
 	if grenade_count > 0 and grenade_scene and explosion_scene:
 		grenade_count -= 1
 		grenades_changed.emit(grenade_count)
+		
+		print("Бросаю гранату! Осталось: %d" % grenade_count)
+		
 		var grenade = grenade_scene.instantiate()
+		
 		grenade.explosion_scene = self.explosion_scene
-		var direction = (get_global_mouse_position() - global_position).normalized()
-		grenade.launch_velocity = direction * grenade_launch_force
+		
+		grenade.target_position = get_global_mouse_position()
 		
 		get_tree().root.add_child(grenade)
-		var spawn_offset = 120.0 
-		var spawn_position = self.global_position + direction * spawn_offset
-		grenade.global_position = spawn_position
+		
+		grenade.global_position = self.global_position
 		
 func add_grenades(amount: int):
 	grenade_count += amount

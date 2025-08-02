@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxpe2hg8556a"]
+
+[ext_resource type="Texture2D" uid="uid://crrob3r587ojq" path="res://sprites/boxing_glove.png" id="1_hv8ke"]
+[ext_resource type="Script" uid="uid://cpoalucshllm6" path="res://scripts/melee_hit.gd" id="1_q01as"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q01as"]
+size = Vector2(79, 96)
+
+[node name="MeleeHit" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_q01as")
+
+[node name="LifetimeTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_hv8ke")
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, 6)
+shape = SubResource("RectangleShape2D_q01as")

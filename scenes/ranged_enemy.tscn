@@ -2,26 +2,19 @@
 
 [ext_resource type="PackedScene" uid="uid://cdv6tpk30ep85" path="res://scenes/EnemyBase.tscn" id="1_u2kgh"]
 [ext_resource type="Script" uid="uid://cx2ysq1sipvka" path="res://scripts/ranged_enemy.gd" id="2_32iyl"]
-[ext_resource type="PackedScene" uid="uid://bkx4rexu5v4oq" path="res://scenes/enemy_bullet.tscn" id="3_32iyl"]
+[ext_resource type="PackedScene" uid="uid://d0cymp035dqvs" path="res://scenes/pistol.tscn" id="3_v0fr6"]
 
 [node name="RangedEnemy" instance=ExtResource("1_u2kgh")]
 script = ExtResource("2_32iyl")
-enemy_bullet_scene = ExtResource("3_32iyl")
 fire_rate = 2.0
-bullet_damage = 5
-bullet_speed = 700.0
+weapon_scene = ExtResource("3_v0fr6")
 
 [node name="Sprite2D" parent="." index="0"]
 modulate = Color(0.875833, 0.735978, 0.0900142, 1)
-rotation = 1.5708
 
 [node name="FireRateTimer" type="Timer" parent="." index="7"]
 one_shot = true
 
-[node name="Muzzle" type="Marker2D" parent="." index="8"]
-position = Vector2(-117, -48)
+[node name="WeaponHolder" type="Node2D" parent="." index="8"]
 
-[node name="AttackTimer" type="Timer" parent="." index="9"]
-one_shot = true
-
-[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_attack_timer_timeout"]

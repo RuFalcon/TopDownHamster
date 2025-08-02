@@ -23,6 +23,7 @@ func _process(delta):
 	if is_equipped and is_held_by_player:
 		aim()
 		
+		
 func aim():
 	var mouse_pos = get_global_mouse_position()
 	look_at(mouse_pos)
