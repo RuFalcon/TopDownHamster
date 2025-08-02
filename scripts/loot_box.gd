@@ -22,7 +22,7 @@ func take_damage(amount: int):
 
 func destroy_box():
 	print("Ящик разрушен!")
-	
+	SoundManager.play_sfx("box_break")
 	if loot_scene:
 		var loot_instance = loot_scene.instantiate()
 		

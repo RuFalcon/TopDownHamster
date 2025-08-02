@@ -11,6 +11,7 @@ var hit_enemies = []
 
 func _ready():
 	animated_sprite.play("explode")
+	SoundManager.play_sfx("throw_grenade")
 	animated_sprite.animation_finished.connect(_on_animation_finished)
 	
 	body_entered.connect(_on_body_entered)
@@ -23,7 +24,6 @@ func _ready():
 
 func _on_body_entered(body):
 	if body.is_in_group("enemies") and not body in hit_enemies:
-		
 		hit_enemies.append(body)
 		
 		if body.has_method("take_damage"):

@@ -60,6 +60,7 @@ func _post_shoot_effects(bullet_instance):
 	
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player") and body.has_method("equip_weapon"):
+		SoundManager.play_sfx("ammo")
 		body.equip_weapon(self)
 
 
