@@ -18,6 +18,8 @@ var can_shoot = true
 @onready var muzzle = $Muzzle
 @onready var pickup_collider = $Area2D/CollisionShape2D
 @onready var pickup_delay_timer = $PickupDelayTimer
+
+var is_enemy_weapon: bool = false
 	
 func _process(delta):
 	if is_equipped and is_held_by_player:
@@ -59,7 +61,7 @@ func _post_shoot_effects(bullet_instance):
 	pass
 	
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player") and body.has_method("equip_weapon"):
+	if body.is_in_group("player") and body.has_method("equip_weapon") and !is_enemy_weapon:
 		SoundManager.play_sfx("ammo")
 		body.equip_weapon(self)
 

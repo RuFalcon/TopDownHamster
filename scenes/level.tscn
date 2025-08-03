@@ -1,7 +1,6 @@
-[gd_scene load_steps=21 format=4 uid="uid://cxdkq83200fqu"]
+[gd_scene load_steps=20 format=4 uid="uid://cxdkq83200fqu"]
 
 [ext_resource type="Texture2D" uid="uid://cyktg5rirwl3e" path="res://sprites/Wall.svg" id="1_w7c3h"]
-[ext_resource type="PackedScene" uid="uid://cpucsnew67t36" path="res://scenes/melee_enemy.tscn" id="1_wc255"]
 [ext_resource type="PackedScene" uid="uid://vxmmx38l3bud" path="res://scenes/player.tscn" id="2_w8frs"]
 [ext_resource type="PackedScene" uid="uid://cgyj20s3g3wj3" path="res://scenes/ranged_enemy.tscn" id="2_wc255"]
 [ext_resource type="PackedScene" uid="uid://5kjktm8upgih" path="res://scenes/key.tscn" id="3_2r41h"]
@@ -44,8 +43,8 @@ position = Vector2(236, 244)
 [node name="RangedEnemy" parent="Enemies" instance=ExtResource("2_wc255")]
 position = Vector2(2617, -182)
 
-[node name="MeleeEnemy" parent="Enemies" instance=ExtResource("1_wc255")]
-position = Vector2(1334, 156)
+[node name="RangedEnemy2" parent="Enemies" instance=ExtResource("2_wc255")]
+position = Vector2(879, 129)
 
 [node name="Items" type="Node" parent="."]
 

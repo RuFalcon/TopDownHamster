@@ -17,6 +17,7 @@ func _initialize_enemy():
 		weapon_holder.add_child(current_weapon)
 		current_weapon.set_script(load("res://scripts/enemy_weapon_base.gd"))
 		current_weapon.bullet_scene = load("res://scenes/enemy_bullet.tscn")
+		current_weapon.is_enemy_weapon = true
 		attack_timer.wait_time = 1.0 / (current_weapon.fire_rate * 0.5)
 	else:
 		print("ОШИБКА: У стреляющего врага нет оружия в WeaponHolder!")
