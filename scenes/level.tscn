@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://cxdkq83200fqu"]
+[gd_scene load_steps=21 format=4 uid="uid://cxdkq83200fqu"]
 
 [ext_resource type="Texture2D" uid="uid://cyktg5rirwl3e" path="res://sprites/Wall.svg" id="1_w7c3h"]
 [ext_resource type="PackedScene" uid="uid://cpucsnew67t36" path="res://scenes/melee_enemy.tscn" id="1_wc255"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cjwfe8ag3ruqi" path="res://scenes/door_trigger.tscn" id="8_8iemx"]
 [ext_resource type="PackedScene" uid="uid://bew3enlgrsdsl" path="res://scenes/game_ui.tscn" id="9_8c41q"]
 [ext_resource type="PackedScene" uid="uid://d0cymp035dqvs" path="res://scenes/pistol.tscn" id="9_fpun6"]
+[ext_resource type="PackedScene" uid="uid://bpp5hyn3pyc4c" path="res://scenes/hint_object.tscn" id="10_ux5qa"]
 [ext_resource type="PackedScene" uid="uid://b410kanoouvnm" path="res://scenes/rifle.tscn" id="10_wc255"]
 [ext_resource type="PackedScene" uid="uid://c7mjcnsnv26ua" path="res://scenes/smg.tscn" id="11_arp2o"]
 [ext_resource type="PackedScene" uid="uid://c64b11crsa0g1" path="res://scenes/bazooka.tscn" id="12_ux5qa"]
@@ -78,6 +79,8 @@ action = "close_only"
 [node name="Door" parent="Doors" instance=ExtResource("3_w8frs")]
 position = Vector2(1600, 0)
 
+[node name="HintObject" parent="Doors/Door" instance=ExtResource("10_ux5qa")]
+
 [node name="DoorBase2" parent="Doors" instance=ExtResource("7_t1rx8")]
 position = Vector2(2368, 2)
 is_open_by_default = true
@@ -102,6 +105,9 @@ tile_set = SubResource("TileSet_8c41q")
 [node name="LootBox" parent="LootBoxes" instance=ExtResource("15_wc255")]
 position = Vector2(730, -433)
 loot_scene = ExtResource("10_wc255")
+
+[node name="HintObject" parent="LootBoxes/LootBox" instance=ExtResource("10_ux5qa")]
+hint_text = "Need a Shoot"
 
 [node name="LootBox2" parent="LootBoxes" instance=ExtResource("15_wc255")]
 position = Vector2(1412, 1130)
